@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {}
+    "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {}
   },
   "projects": {
-    "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {
+    "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
+        "projectUniqueName": "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
         "projectName": "DatingApp.API",
-        "projectPath": "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
+        "projectPath": "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
         "packagesPath": "C:\\Users\\25198\\.nuget\\packages\\",
-        "outputPath": "D:\\practiceProject\\DatingApp.API\\obj\\",
+        "outputPath": "d:\\practiceProject\\DatingApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\25198\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -39,6 +39,16 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore.Sqlite.Core": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Swashbuckle.AspNetCore": {
+              "target": "Package",
+              "version": "[6.2.3, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",
@@ -49,7 +59,15 @@
           ],
           "assetTargetFallback": true,
           "warn": true,
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.407\\RuntimeIdentifierGraph.json"
+          "frameworkReferences": {
+            "Microsoft.AspNetCore.App": {
+              "privateAssets": "none"
+            },
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\6.0.300\\RuntimeIdentifierGraph.json"
         }
       }
     }
