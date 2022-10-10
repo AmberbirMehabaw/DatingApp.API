@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {}
+    "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {}
   },
   "projects": {
-    "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {
+    "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
+        "projectUniqueName": "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
         "projectName": "DatingApp.API",
-        "projectPath": "d:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
+        "projectPath": "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
         "packagesPath": "C:\\Users\\25198\\.nuget\\packages\\",
-        "outputPath": "d:\\practiceProject\\DatingApp.API\\obj\\",
+        "outputPath": "D:\\practiceProject\\DatingApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\25198\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -40,7 +40,21 @@
         "net6.0": {
           "targetAlias": "net6.0",
           "dependencies": {
+            "Arch.EntityFrameworkCore.Design": {
+              "target": "Package",
+              "version": "[2.1.15, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[6.0.6, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite.Core": {
+              "target": "Package",
+              "version": "[6.0.9, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
               "target": "Package",
               "version": "[6.0.9, )"
             },
