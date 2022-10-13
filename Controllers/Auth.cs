@@ -1,0 +1,76 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Security.Claims;
+
+using System.Threading.Tasks;
+using DatingApp.API.DTOs;
+using DatingApp.API.Models;
+using Microsoft.AspNetCore.Mvc;
+using System.Security.Cryptography;
+using System.IdentityModel.Tokens.Jwt;
+using Microsoft.IdentityModel.Tokens;
+
+
+using System.Text;
+using Microsoft.AspNetCore.Authorization;
+
+namespace DatingApp.API.Controllers
+{    [Authorize]
+    [ApiController]
+    [Route("[controller]")]
+    public class Auth : ControllerBase
+    {
+        public IAuthRepository _repo { get; }
+        public IConfiguration _config { get; }
+      public Auth(IAuthRepository repo, IConfiguration config)
+      {
+            _config = config;
+            _repo = repo;
+        
+      }  
+      [AllowAnonymous]
+      [HttpPost("register")]
+      public async Task<IActionResult> Register(UserRegisterDto userRegisterDto)
+      {
+        userRegisterDto.username = userRegisterDto.username.ToLower();
+        if(await _repo.UserExists(userRegisterDto.username))
+            return BadRequest("User already exists");
+
+        var userToBeCreated = new User{
+            Name = userRegisterDto.username
+        };
+
+        var CreatedUser = await _repo.Register(userToBeCreated, userRegisterDto.password);
+        return StatusCode(201);
+      }
+      [AllowAnonymous]
+      [HttpPost("login")]
+      public async Task<IActionResult> Login(UserLoginDto userLoginDto)
+      {
+        var user = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
+        if (user == null)
+          return Unauthorized();
+        var claims = new []
+        {
+          new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
+          new Claim(ClaimTypes.Name, user.Name)
+        };
+      var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
+      var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
+
+      var tokenDescriptor = new SecurityTokenDescriptor{
+        Subject = new ClaimsIdentity(claims),
+        Expires = DateTime.Now.AddDays(1),
+        SigningCredentials = creds,
+      };
+
+      var tokenHandler = new JwtSecurityTokenHandler();
+      var token = tokenHandler.CreateToken(tokenDescriptor);
+
+        return Ok(new{
+          token = tokenHandler.WriteToken(token)
+        });
+      }
+    }
+}

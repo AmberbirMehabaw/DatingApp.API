@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {}
+    "D:\\practiceProject\\DatingApp\\DatingApp.API\\DatingApp.API.csproj": {}
   },
   "projects": {
-    "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj": {
+    "D:\\practiceProject\\DatingApp\\DatingApp.API\\DatingApp.API.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
+        "projectUniqueName": "D:\\practiceProject\\DatingApp\\DatingApp.API\\DatingApp.API.csproj",
         "projectName": "DatingApp.API",
-        "projectPath": "D:\\practiceProject\\DatingApp.API\\DatingApp.API.csproj",
+        "projectPath": "D:\\practiceProject\\DatingApp\\DatingApp.API\\DatingApp.API.csproj",
         "packagesPath": "C:\\Users\\25198\\.nuget\\packages\\",
-        "outputPath": "D:\\practiceProject\\DatingApp.API\\obj\\",
+        "outputPath": "D:\\practiceProject\\DatingApp\\DatingApp.API\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\25198\\AppData\\Roaming\\NuGet\\NuGet.Config",
@@ -44,6 +44,10 @@
               "target": "Package",
               "version": "[2.1.15, )"
             },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[*, )"
+            },
             "Microsoft.EntityFrameworkCore.Sqlite": {
               "target": "Package",
               "version": "[6.0.6, )"
@@ -58,9 +62,21 @@
               "target": "Package",
               "version": "[6.0.9, )"
             },
+            "Microsoft.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[6.23.1, )"
+            },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
               "version": "[6.2.3, )"
+            },
+            "System.IdentityModel.Tokens": {
+              "target": "Package",
+              "version": "[5.0.0-rc1-211161024, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[6.23.1, )"
             }
           },
           "imports": [
