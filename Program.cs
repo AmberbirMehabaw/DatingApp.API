@@ -45,7 +45,9 @@ app.UseCors(option => option.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader())
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
-// app.UseMvc();
+
 app.MapControllers();
 app.UseAuthentication();
+
 app.Run();
+// app.UseMvc();

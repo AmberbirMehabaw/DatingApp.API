@@ -9,15 +9,15 @@ namespace DatingApp.API.Models
 {
     public class AuthRepository : IAuthRepository
     {
-        public DataContext Context { get; }
+        private readonly DataContext _context;
         public AuthRepository(DataContext context)
         {
-            this.Context = context;
-            
+            _context = context;
         }
         public async Task<User> Login(string username, string password)
-        {
-            var user = await Context.Users.FirstOrDefaultAsync(x=> x.Name == username);
+        {   
+            // username = username.ToLower();
+            var user = await _context.Users.FirstOrDefaultAsync(x=> x.Username== username);
             
             if(user == null)
                 return null;
@@ -25,7 +25,7 @@ namespace DatingApp.API.Models
             if(!VerifyPasswordHash(password, user.PasswordHash, user.PasswordSalt))
                 return null;
 
-            return (user);
+            return user;
         }
 
         private bool VerifyPasswordHash(string password, byte[] passwordHash, byte[] passwordSalt)
@@ -33,12 +33,14 @@ namespace DatingApp.API.Models
               using (var hmac = new System.Security.Cryptography.HMACSHA512(passwordSalt))
             {
                 var ComputedHash = hmac.ComputeHash(System.Text.Encoding.UTF8.GetBytes(password));
-                for (int i=0; i<ComputedHash.Length; i++){
-                    if(ComputedHash[i] != passwordHash[i])
+                for (int i=0; i<ComputedHash.Length; i++)
+                {
+                    if(ComputedHash[i] != passwordHash[i]){
                         return false;
+                    }  
                 }
-                return true;
             }
+            return true;
         }
 
         public async Task<User> Register(User user, string password)
@@ -47,8 +49,8 @@ namespace DatingApp.API.Models
             CreatePassWordHash(password, out PasswordHash, out PasswordSalt);
             user.PasswordHash = PasswordHash;
             user.PasswordSalt = PasswordSalt;
-            await Context.Users.AddAsync(user);
-            await Context.SaveChangesAsync();
+            await _context.Users.AddAsync(user);
+            await _context.SaveChangesAsync();
             return (user);
         }
 
@@ -63,7 +65,7 @@ namespace DatingApp.API.Models
 
         public async Task<bool> UserExists(string username)
         {
-            if(await Context.Users.AnyAsync(x=>x.Name == username))
+            if(await _context.Users.AnyAsync(x=>x.Username == username))
                 return true;
             
             return false;

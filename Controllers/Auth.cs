@@ -16,9 +16,10 @@ using System.Text;
 using Microsoft.AspNetCore.Authorization;
 
 namespace DatingApp.API.Controllers
-{    [Authorize]
+{   
+    // [Authorize]
     [ApiController]
-    [Route("[controller]")]
+    [Route("api/Auth")]
     public class Auth : ControllerBase
     {
         public IAuthRepository _repo { get; }
@@ -38,23 +39,25 @@ namespace DatingApp.API.Controllers
             return BadRequest("User already exists");
 
         var userToBeCreated = new User{
-            Name = userRegisterDto.username
+            Username = userRegisterDto.username
         };
 
         var CreatedUser = await _repo.Register(userToBeCreated, userRegisterDto.password);
         return StatusCode(201);
       }
-      [AllowAnonymous]
+      // [AllowAnonymous]
       [HttpPost("login")]
       public async Task<IActionResult> Login(UserLoginDto userLoginDto)
       {
-        var user = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
-        if (user == null)
+        var userFromRepo = await _repo.Login(userLoginDto.Username, userLoginDto.Password);
+        if (userFromRepo == null){
           return Unauthorized();
+        }
+          
         var claims = new []
         {
-          new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()),
-          new Claim(ClaimTypes.Name, user.Name)
+          new Claim(ClaimTypes.NameIdentifier, userFromRepo.Id.ToString()),
+          new Claim(ClaimTypes.Name, userFromRepo.Username)
         };
       var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(_config.GetSection("AppSettings:Token").Value));
       var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha512Signature);
